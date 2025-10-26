@@ -9,4 +9,4 @@ MainWindow::MainWindow() {
     resize(1000, 1000);
 }
 
-MainWindow::~MainWindow() = default;
+// MainWindow::~MainWindow() = default;
