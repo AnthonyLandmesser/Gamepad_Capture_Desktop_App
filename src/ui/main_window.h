@@ -4,5 +4,4 @@
 class MainWindow : public QMainWindow {
 public:
     MainWindow();
-    // ~MainWindow();
 };
