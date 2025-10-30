@@ -53,6 +53,10 @@
           debug = {
             type = "app";
             program = "${self.packages.${system}.debug}/bin/Gamepad-Capture";
+            # ignores leaks from fontconfig since Qt does not manual deinitialize fonts
+            runtimeEnv = {
+              LSAN_OPTIONS = "suppresions=src/lsan.supp";
+            };
           };
         }
       );
