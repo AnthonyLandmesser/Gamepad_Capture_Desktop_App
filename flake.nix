@@ -33,6 +33,13 @@
               "-DCMAKE_BUILD_TYPE=Release"
             ];
           };
+          debug = self.packages.${system}.default.overrideAttrs (old: {
+            cmakeFlags = [
+              "-DCMAKE_BUILD_TYPE=Debug"
+            ];
+            CXXFLAGS = "-fsanitize=address -g";
+            LDFLAGS = "-fsanitize=address";
+          });
         }
       );
 
@@ -42,6 +49,10 @@
           default = {
             type = "app";
             program = "${self.packages.${system}.default}/bin/Gamepad-Capture";
+          };
+          debug = {
+            type = "app";
+            program = "${self.packages.${system}.debug}/bin/Gamepad-Capture";
           };
         }
       );
