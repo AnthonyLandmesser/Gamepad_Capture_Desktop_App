@@ -24,6 +24,8 @@
               cmake
               ccache
               ninja
+              #only used in debug build
+              makeWrapper
             ];
             buildInputs = with pkgs; [
               # reduce build dependencies once prototype works
@@ -39,6 +41,10 @@
             ];
             CXXFLAGS = "-fsanitize=address -g";
             LDFLAGS = "-fsanitize=address";
+            # ignores leaks from fontconfig since Qt does not manual deinitialize fonts
+            postInstall = ''
+              wrapProgram $out/bin/Gamepad-Capture --set LSAN_OPTIONS "suppressions=${./lsan.supp}"
+            '';
           });
         }
       );
@@ -53,10 +59,6 @@
           debug = {
             type = "app";
             program = "${self.packages.${system}.debug}/bin/Gamepad-Capture";
-            # ignores leaks from fontconfig since Qt does not manual deinitialize fonts
-            runtimeEnv = {
-              LSAN_OPTIONS = "suppresions=src/lsan.supp";
-            };
           };
         }
       );
