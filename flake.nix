@@ -35,17 +35,19 @@
               "-DCMAKE_BUILD_TYPE=Release"
             ];
           };
-          debug = self.packages.${system}.default.overrideAttrs (old: {
-            cmakeFlags = [
-              "-DCMAKE_BUILD_TYPE=Debug"
-            ];
-            CXXFLAGS = "-fsanitize=address -g";
-            LDFLAGS = "-fsanitize=address";
-            # ignores leaks from fontconfig since Qt does not manual deinitialize fonts
-            postInstall = ''
-              wrapProgram $out/bin/Gamepad-Capture --set LSAN_OPTIONS "suppressions=${./lsan.supp}"
-            '';
-          });
+          debug = self.packages.${system}.default.overrideAttrs (old:
+            {
+              cmakeFlags = [
+                "-DCMAKE_BUILD_TYPE=Debug"
+              ];
+              CXXFLAGS = "-fsanitize=address -g";
+              LDFLAGS = "-fsanitize=address";
+              # ignores leaks from fontconfig since Qt does not manual deinitialize fonts
+              postInstall = ''
+                wrapProgram $out/bin/Gamepad-Capture --set LSAN_OPTIONS "suppressions=${./lsan.supp}"
+              '';
+            }
+          );
         }
       );
 
