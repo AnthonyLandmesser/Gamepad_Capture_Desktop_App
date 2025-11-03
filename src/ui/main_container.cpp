@@ -1,5 +1,4 @@
 #include "ui/main_container.h"
-#include "video/video_window.h"
 #include <QVBoxLayout>
 
 MainContainer::MainContainer() {
@@ -12,7 +11,7 @@ MainContainer::MainContainer() {
     buttonFont.setPointSize(buttonFont.pointSize()*4);
     button->setFont(buttonFont);
 
-    connect(button, &QPushButton::clicked, this, &MainContainer::launchVideo);
+    connect(button, &QPushButton::clicked, this, &MainContainer::changeVideoState);
     
     QVBoxLayout* layout = new QVBoxLayout;
     setLayout(layout);
@@ -20,13 +19,23 @@ MainContainer::MainContainer() {
 }
 
 void MainContainer::launchVideo() {
+    videoActive = true;
+    video = new VideoWindow(this);
+    video->show();
+    button->setText(closeText);
+}
+
+void MainContainer::closeVideo() {
+    videoActive = false;
+    button->setText(launchText);
+}
+
+void MainContainer::changeVideoState() {
     if (videoActive) {
-        button->setText(launchText);
+        video->close();
+        closeVideo();
     }
     else {
-        VideoWindow* video = new VideoWindow(this);
-        video->show();
-        button->setText(closeText);
+        launchVideo();
     }
-    videoActive = !videoActive;
 }

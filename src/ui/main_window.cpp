@@ -1,8 +1,15 @@
 #include "ui/main_window.h"
-#include "ui/main_container.h"
 
 MainWindow::MainWindow() {
-    setCentralWidget(new MainContainer);
+    container = new MainContainer;
+    setCentralWidget(container);
     setWindowTitle(tr("Wii U Gamepad Monitor"));
     resize(1000, 1000);
+}
+
+void MainWindow::closeEvent(QCloseEvent* event) {
+    if (container->videoActive) {
+        container->changeVideoState();
+    }
+    QMainWindow::closeEvent(event);
 }
