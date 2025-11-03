@@ -1,4 +1,5 @@
 #include "ui/main_container.h"
+#include "video/video_window.h"
 #include <QVBoxLayout>
 
 MainContainer::MainContainer() {
@@ -23,6 +24,8 @@ void MainContainer::launchVideo() {
         button->setText(launchText);
     }
     else {
+        VideoWindow* video = new VideoWindow(this);
+        video->show();
         button->setText(closeText);
     }
     videoActive = !videoActive;
