@@ -18,14 +18,12 @@ MainContainer::MainContainer() {
     layout->addWidget(button, 0, Qt::AlignCenter);
 }
 
-void MainContainer::launchVideo() {
+void MainContainer::launchState() {
     videoActive = true;
-    video = new VideoWindow(this);
-    video->show();
     button->setText(closeText);
 }
 
-void MainContainer::closeVideo() {
+void MainContainer::closeState() {
     videoActive = false;
     button->setText(launchText);
 }
@@ -33,9 +31,11 @@ void MainContainer::closeVideo() {
 void MainContainer::changeVideoState() {
     if (videoActive) {
         video->close();
-        closeVideo();
+        // closeState();
     }
     else {
-        launchVideo();
+        video = new VideoWindow(this);
+        video->show();
+        launchState();
     }
 }

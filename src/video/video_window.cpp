@@ -2,12 +2,22 @@
 #include "ui/main_container.h"
 #include <QMouseEvent>
 #include <QWindow>
+#include <QVBoxLayout>
+#include <QLabel>
 
 VideoWindow::VideoWindow(MainContainer* parent) : QWidget(nullptr, Qt::Window | Qt::FramelessWindowHint) {
+    setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(tr("Wii U Gamepad Stream"));
     setFixedSize(854, 480);
 
-    connect(this, &VideoWindow::destroyed, parent, &MainContainer::closeVideo);
+    QLabel* label = new QLabel(tr("No video source available"));
+    label->resize(854, 480);
+
+    QVBoxLayout* layout = new QVBoxLayout;
+    setLayout(layout);
+    layout->addWidget(label, 0, Qt::AlignCenter);
+
+    connect(this, &VideoWindow::closed, parent, &MainContainer::closeState);
 }
 
 void VideoWindow::mousePressEvent(QMouseEvent* event) {
@@ -18,5 +28,5 @@ void VideoWindow::mousePressEvent(QMouseEvent* event) {
 }
 
 void VideoWindow::closeEvent(QCloseEvent* event) {
-    emit destroyed();
+    emit closed();
 }

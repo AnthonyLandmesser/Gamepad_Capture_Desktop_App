@@ -7,11 +7,11 @@ class MainContainer : public QWidget {
     Q_OBJECT
 public:
     MainContainer();
-    void launchVideo();
+    void launchState();
     VideoWindow* video;
     bool videoActive;
 public slots:
-    void closeVideo();
+    void closeState();
     void changeVideoState();
 private:
     QString launchText;

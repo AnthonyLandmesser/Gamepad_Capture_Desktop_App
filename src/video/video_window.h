@@ -9,7 +9,7 @@ public:
     VideoWindow(MainContainer* parent);
     MainContainer* parent;
 signals:
-    void destroyed();
+    void closed();
 private:
     void mousePressEvent(QMouseEvent* event) override;
     void closeEvent(QCloseEvent* event) override;
