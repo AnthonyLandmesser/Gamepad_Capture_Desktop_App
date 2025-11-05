@@ -1,16 +1,18 @@
 #pragma once
 #include <QWidget>
-#include <QPushButton>
-#include "video/video_window.h"
+#include <QString>
+
+class QPushButton;
+class VideoWindow;
 
 class MainContainer : public QWidget {
     Q_OBJECT
 public:
     MainContainer();
-    void launchState();
     VideoWindow* video;
-    bool videoActive;
+    bool isVideoActive;
 public slots:
+    void launchState();
     void closeState();
     void changeVideoState();
 private:

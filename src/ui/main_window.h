@@ -1,8 +1,10 @@
 #pragma once
 #include <QMainWindow>
-#include "ui/main_container.h"
+
+class MainContainer;
 
 class MainWindow : public QMainWindow {
+    Q_OBJECT
 public:
     MainWindow();
 private:

@@ -1,6 +1,8 @@
 #pragma once
 #include <QWidget>
 
+class QMouseEvent;
+class QCloseEvent;
 class MainContainer;
 
 class VideoWindow : public QWidget {

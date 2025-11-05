@@ -1,10 +1,12 @@
 #include "ui/main_container.h"
 #include <QVBoxLayout>
+#include <QPushButton>
+#include "video/video_window.h"
 
 MainContainer::MainContainer() {
     launchText = tr("Launch Gamepad Stream");
     closeText = tr("Close Gamepad Stream");
-    videoActive = false;
+    isVideoActive = false;
 
     button = new QPushButton(launchText);
     QFont buttonFont = button->font();
@@ -19,19 +21,18 @@ MainContainer::MainContainer() {
 }
 
 void MainContainer::launchState() {
-    videoActive = true;
+    isVideoActive = true;
     button->setText(closeText);
 }
 
 void MainContainer::closeState() {
-    videoActive = false;
+    isVideoActive = false;
     button->setText(launchText);
 }
 
 void MainContainer::changeVideoState() {
-    if (videoActive) {
+    if (isVideoActive) {
         video->close();
-        // closeState();
     }
     else {
         video = new VideoWindow(this);

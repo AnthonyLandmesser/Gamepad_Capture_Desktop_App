@@ -1,4 +1,5 @@
 #include "ui/main_window.h"
+#include "ui/main_container.h"
 
 MainWindow::MainWindow() {
     container = new MainContainer;
@@ -8,7 +9,7 @@ MainWindow::MainWindow() {
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-    if (container->videoActive) {
+    if (container->isVideoActive) {
         container->changeVideoState();
     }
     QMainWindow::closeEvent(event);

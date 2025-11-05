@@ -1,6 +1,6 @@
-#include "ui/main_window.h"
 #include <QApplication>
 #include <QDebug>
+#include "ui/main_window.h"
 
 int main(int argc, char *argv[]) {
     #ifdef QT_DEBUG

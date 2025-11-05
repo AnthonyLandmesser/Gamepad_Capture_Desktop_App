@@ -1,9 +1,11 @@
 #include "video/video_window.h"
-#include "ui/main_container.h"
-#include <QMouseEvent>
-#include <QWindow>
 #include <QVBoxLayout>
+#include <QWindow>
+#include <Qt>
 #include <QLabel>
+#include <QMouseEvent>
+#include <QCloseEvent>
+#include "ui/main_container.h"
 
 VideoWindow::VideoWindow(MainContainer* parent) : QWidget(nullptr, Qt::Window | Qt::FramelessWindowHint) {
     setAttribute(Qt::WA_DeleteOnClose);
@@ -29,4 +31,5 @@ void VideoWindow::mousePressEvent(QMouseEvent* event) {
 
 void VideoWindow::closeEvent(QCloseEvent* event) {
     emit closed();
+    QWidget::closeEvent(event);
 }
