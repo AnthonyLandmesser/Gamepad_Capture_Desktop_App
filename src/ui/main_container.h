@@ -11,10 +11,10 @@ public:
     MainContainer();
     VideoWindow* video;
     bool isVideoActive;
-public slots:
-    void launchState();
-    void closeState();
-    void changeVideoState();
+    public slots:
+        void launchState();
+        void closeState();
+        void changeVideoState();
 private:
     QString launchText;
     QString closeText;

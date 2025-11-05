@@ -14,6 +14,7 @@ qt_add_executable(${PROJECT_NAME}
     src/ui/main_window.cpp
     src/ui/main_container.cpp
     src/video/video_window.cpp
+    src/video/video_worker.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
