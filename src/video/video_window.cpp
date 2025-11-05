@@ -24,7 +24,8 @@ VideoWindow::VideoWindow(MainContainer* parent) : QWidget(nullptr, Qt::Window | 
 
 void VideoWindow::mousePressEvent(QMouseEvent* event) {
     if (event->button() == Qt::LeftButton) {
-        windowHandle()->startSystemMove();
+        QWindow* window = windowHandle();
+        window->startSystemMove();
     }
     QWidget::mousePressEvent(event);
 }
