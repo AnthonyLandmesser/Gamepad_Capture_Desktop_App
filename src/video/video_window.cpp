@@ -10,6 +10,7 @@
 #include <QCloseEvent>
 #include "ui/main_container.h"
 #include "video/video_worker.h"
+#include "video/video_decoder.h"
 
 VideoWindow::VideoWindow(MainContainer* parent) : QWidget(nullptr, Qt::Window | Qt::FramelessWindowHint) {
     setAttribute(Qt::WA_DeleteOnClose);
@@ -28,7 +29,7 @@ VideoWindow::VideoWindow(MainContainer* parent) : QWidget(nullptr, Qt::Window | 
     thread = new QThread(this);
     videoWorker = new VideoWorker;
     videoWorker->moveToThread(thread);
-    connect(videoWorker, &VideoWorker::frame, this, &VideoWindow::updateFrame);
+    connect(videoWorker->videoDecoder, &VideoDecoder::readyFrame, this, &VideoWindow::updateFrame);
     connect(this, &VideoWindow::closed, videoWorker, &VideoWorker::endProcess);
     thread->start();
 }
@@ -37,7 +38,6 @@ VideoWindow::~VideoWindow() {
     thread->quit();
     thread->wait();
     delete videoWorker;
-    qDebug() << "deleted thread";
 }
 
 void VideoWindow::updateFrame(const QImage& frame) {

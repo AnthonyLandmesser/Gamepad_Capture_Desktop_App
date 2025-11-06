@@ -1,15 +1,17 @@
 #include <QObject>
 
-class QImage;
+class QUdpSocket;
+class VideoDecoder;
 
 class VideoWorker : public QObject {
     Q_OBJECT
 public:
     VideoWorker();
+    VideoDecoder* videoDecoder;
     public slots:
         void endProcess();
-    signals:
-        void frame(const QImage& image);
+        void processPacket();
 private:
     bool isRunning;
+    QUdpSocket* socket;
 };

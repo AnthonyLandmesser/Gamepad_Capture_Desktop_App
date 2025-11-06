@@ -30,6 +30,7 @@
             buildInputs = with pkgs; [
               # reduce build dependencies once prototype works
               qt6.full
+              openh264
             ];
             cmakeFlags = [
               "-DCMAKE_BUILD_TYPE=Release"
